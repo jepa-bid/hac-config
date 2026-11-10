@@ -1,0 +1,70 @@
+- id: '1789932227277'
+  name: WiZ Bulbs Snapshot
+  entities:
+    light.ceiling_wiz_bulbs:
+      min_color_temp_kelvin: 2200
+      max_color_temp_kelvin: 6500
+      effect_list:
+      - Alarm
+      - Bedtime
+      - Candlelight
+      - Christmas
+      - Cool white
+      - Cozy
+      - Daylight
+      - Deep dive
+      - Diwali
+      - Fall
+      - Fireplace
+      - Focus
+      - Forest
+      - Golden white
+      - Halloween
+      - Jungle
+      - Mojito
+      - Night light
+      - Ocean
+      - Party
+      - Pastel colors
+      - Plantgrowth
+      - Pulse
+      - Relax
+      - Rhythm
+      - Romance
+      - Spring
+      - Steampunk
+      - Summer
+      - Sunset
+      - TV time
+      - True colors
+      - Wake-up
+      - Warm white
+      - White
+      supported_color_modes:
+      - color_temp
+      - rgbw
+      effect:
+      color_mode: color_temp
+      brightness: 46
+      color_temp_kelvin: 6500
+      hs_color:
+      - 49.231
+      - 1.944
+      rgb_color:
+      - 255
+      - 254
+      - 250
+      xy_color:
+      - 0.326
+      - 0.333
+      rgbw_color:
+      entity_id:
+      - light.wiz_rgbw_tunable_81148e
+      - light.wiz_rgbw_tunable_80f05e
+      friendly_name: Ceiling WiZ Bulbs
+      supported_features: 4
+      state: 'on'
+  metadata:
+    light.ceiling_wiz_bulbs:
+      entity_only: true
+  icon: mdi:lightbulb-group

@@ -1,0 +1,70 @@
+- type: custom:mushroom-chips-card
+  alignment: center
+  chips:
+    - type: template
+      icon: mdi:gas-station
+      icon_color: orange
+      content: "Propane: {{ states('sensor.exterior_propane_tank_monitor_propane_tank_level') }}% ({{ states('sensor.exterior_propane_tank_monitor_propane_gallons_remaining') }} gal)"
+      tap_action:
+        action: more-info
+      entity: sensor.exterior_propane_tank_monitor_propane_tank_level
+    - type: template
+      icon: mdi:barrel
+      icon_color: blue
+      content: "Heating Oil: {{ states('sensor.basement_6764_level') }}% ({{ states('sensor.basement_6764_volume') }} gal)"
+      tap_action:
+        action: more-info
+      entity: sensor.basement_6764_level
+
+- type: heading
+  heading: 🌡️ Climate Controls
+
+- type: grid
+  columns: 3
+  square: false
+  cards:
+    - type: custom:mushroom-climate-card
+      entity: climate.t6_pro_z_wave_programmable_thermostat_3
+      name: 1st Floor
+      hvac_modes:
+        - heat
+        - cool
+        - "off"
+      show_temperature_control: true
+    - type: custom:mushroom-climate-card
+      entity: climate.t6_pro_z_wave_programmable_thermostat_2
+      name: 2nd Floor
+      hvac_modes:
+        - heat
+        - cool
+        - "off"
+      show_temperature_control: true
+    - type: custom:mushroom-climate-card
+      entity: climate.t6_pro_z_wave_programmable_thermostat
+      name: ADU
+      hvac_modes:
+        - heat
+        - cool
+        - "off"
+      show_temperature_control: true
+
+- type: heading
+  heading: 🚗 Garage Doors
+
+- type: grid
+  columns: 3
+  square: false
+  cards:
+    - type: custom:mushroom-cover-card
+      entity: cover.ratgdov2_5i_fb86fe_door
+      name: Bay 1
+      show_buttons_control: true
+    - type: custom:mushroom-cover-card
+      entity: cover.ratgdov2_5i_fb81c5_door
+      name: Bay 2
+      show_buttons_control: true
+    - type: custom:mushroom-cover-card
+      entity: cover.ratgdov2_5i_fb8e24_door
+      name: Bay 3
+      show_buttons_control: true
+

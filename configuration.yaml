@@ -1,0 +1,273 @@
+lovelace:
+  resource_mode: yaml
+  dashboards:
+    lovelace:
+      mode: yaml
+      filename: ui-lovelace.yaml
+      title: Overview
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
+    family-view:
+      mode: yaml
+      filename: family_dashboard.yaml
+      title: "Home Control"
+      icon: mdi:home-heart
+      show_in_sidebar: true
+  resources:
+    - url: /local/community/lovelace-mushroom/mushroom.js
+      type: module
+
+# 1. Create a sensor that only counts total gallons consumed (it only goes UP)
+input_number:
+  light_auto_off_minutes_basement_exterior:
+    name: "Light Basement Exterior auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_hallway_stairs:
+    name: "Light Hallway Stairs auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_garage_interior:
+    name: "Lights Garage Interior auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_rear_stairs:
+    name: "Light Rear Stairs auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_media_room_ceiling:
+    name: "Switch Media Room Ceiling auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_garage_exterior:
+    name: "Light Garage Exterior auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_garage_entry:
+    name: "Light Garage Entry auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_outside_front:
+    name: "Lights Outside Front auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_outside_rear:
+    name: "Light Outside Rear auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_front_door:
+    name: "Lights Front Door auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_hallway_stairs_rear:
+    name: "Lights Hallway Stairs Rear auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_basement:
+    name: "Lights Basement auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_fireplace_accent_right:
+    name: "Light Fireplace Accent Right auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+  light_auto_off_minutes_fireplace_accent_left:
+    name: "Light Fireplace Accent Left auto-off minutes"
+    min: 1
+    max: 120
+    step: 1
+    unit_of_measurement: min
+    mode: box
+    icon: mdi:timer-outline
+
+input_datetime:
+  light_shutoff_time_basement_exterior:
+    name: "Light Basement Exterior shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_hallway_stairs:
+    name: "Light Hallway Stairs shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_garage_interior:
+    name: "Lights Garage Interior shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_rear_stairs:
+    name: "Light Rear Stairs shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_media_room_ceiling:
+    name: "Switch Media Room Ceiling shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_garage_exterior:
+    name: "Light Garage Exterior shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_garage_entry:
+    name: "Light Garage Entry shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_outside_front:
+    name: "Lights Outside Front shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_outside_rear:
+    name: "Light Outside Rear shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_front_door:
+    name: "Lights Front Door shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_hallway_stairs_rear:
+    name: "Lights Hallway Stairs Rear shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_basement:
+    name: "Lights Basement shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_fireplace_accent_right:
+    name: "Light Fireplace Accent Right shutoff time"
+    has_date: true
+    has_time: true
+  light_shutoff_time_fireplace_accent_left:
+    name: "Light Fireplace Accent Left shutoff time"
+    has_date: true
+    has_time: true
+
+
+template:
+  - sensor:
+      - name: "Total Propane Consumed"
+        unique_id: total_propane_consumed
+        unit_of_measurement: "gal"
+        device_class: volume
+        state_class: total_increasing
+        icon: "mdi:fire-circle"
+        state: >
+          {% set total_capacity = 120.0 %}
+          {% set current_level = states('sensor.propane_tank_level') | float(none) %}
+          {% if current_level is not none %}
+            {# Calculates cumulative gallons used from a completely full 80% tank #}
+            {{ ((80.0 - current_level) * 1.2) | round(2) }}
+          {% else %}
+            {{ states('sensor.total_propane_consumed') }}
+          {% endif %}
+
+# 2. Feed that continuous count into a Monthly Utility Meter tracker
+utility_meter:
+  monthly_propane_usage:
+    source: sensor.total_propane_consumed
+    name: "Monthly Propane Consumption"
+    cycle: monthly
+network:
+  ingress_interfaces:
+    - enp6s18  
+    - enp6s19  
+auth_oidc:
+  client_id: "87eb80ce1bea81ea5c72cb53d4b218c6ed8656c9272f8841c482adf8b3e54fcd"
+  client_secret: !secret cloudflare_oidc_client_secret
+  discovery_url: "https://jepaservices.cloudflareaccess.com/cdn-cgi/access/sso/oidc/87eb80ce1bea81ea5c72cb53d4b218c6ed8656c9272f8841c482adf8b3e54fcd/.well-known/openid-configuration"
+  display_name: "Google via Cloudflare"
+  features:
+    force_https: true
+# Loads default set of integrations. Do not remove.
+default_config:
+
+# Load frontend themes from the themes folder
+frontend:
+  themes: !include_dir_merge_named themes
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
+google_assistant:
+  project_id: home-assistant-ct-00f28
+  service_account: !include SERVICE_ACCOUNT.json
+  report_state: true
+  exposed_domains:
+    - light
+    - switch
+    - cover
+    - climate
+group:
+  all_house_lights:
+    name: "All House Lights"
+    entities:
+      - switch.basement_basement_exterior_light
+      - switch.light_outside_rear
+      - switch.garage_exterior_lights
+      - switch.front_door_light
+      - switch.lights_outside_front
+      - switch.hallway_stairs_rear
+      - switch.rear_hallway_stairs
+      - switch.garage_entry_light
+      - switch.garage_interior_lights
+      - switch.lights_basement_staiirs
+      - switch.media_room_ceiling_power
+      - light.wiz_rgbw_tunable_80f05e
+      - light.wiz_rgbw_tunable_81148e
+      - light.feit1_2
+      - light.feit2_2
+      - light.feit3
+      - light.feit4_2
+

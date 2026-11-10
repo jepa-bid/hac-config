@@ -1,0 +1,9 @@
+title: Home Overview
+views:
+  - title: Main View
+    path: default_view
+    icon: mdi:home
+    cards:
+      - type: heading
+        heading: Welcome Home
+

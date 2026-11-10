@@ -1,0 +1,102 @@
+#     name: Turn off after (minutes)
+
+blueprint:
+  name: Light or switch - minutes or dawn auto off
+  description: >-
+    Turn a light or switch off after the selected minutes OR at the next civil
+    dawn (sun 6 degrees below the horizon), whichever comes first. Requires
+    the Sun integration with its standard sun.sun entity and correct home
+    location. The saved deadline is the earlier of these two times. If turned
+    on after dawn, the minutes compete with tomorrow's dawn. If Sun data is
+    unavailable when turned on, the minutes alone are used for that cycle.
+    Select a Number helper for the minutes and a Date and/or time helper with
+    BOTH date and time enabled for the deadline. Each device needs its own
+    deadline helper; the minutes helper may be shared. Helpers are created
+    separately. Do not configure an initial value for either YAML helper.
+    Each observed off-to-on transition saves a new deadline. Duration changes
+    apply next time the device turns on. Restarts preserve the deadline;
+    overdue lights are turned off on startup, with a once-per-minute recovery
+    check for unavailable devices or missed deadlines. After setup, set the
+    minutes and cycle the light off/on once. Physical changes while Home
+    Assistant is offline cannot be timed; the last saved deadline is used.
+  domain: automation
+  homeassistant:
+    min_version: "2024.10.0"
+  input:
+    controlled_entity:
+      name: Light or switch
+      description: The single light or switch to turn off automatically.
+      selector:
+        entity:
+          filter:
+            - domain: light
+            - domain: switch
+    minutes_helper:
+      name: Auto-off minutes helper
+      description: Select a Number helper configured with a minimum of 1 minute.
+      selector:
+        entity:
+          filter:
+            - domain: input_number
+    deadline_helper:
+      name: Saved shutoff deadline helper
+      description: >-
+        Select a Date and/or time helper with BOTH date and time enabled.
+        Use a separate deadline helper for each device.
+      selector:
+        entity:
+          filter:
+            - domain: input_datetime
+
+variables:
+  minutes_entity: !input minutes_helper
+  deadline_entity: !input deadline_helper
+
+triggers:
+  - trigger: state
+    entity_id: !input controlled_entity
+    from: "off"
+    to: "on"
+    id: turned_on
+  - trigger: time
+    at: !input deadline_helper
+    id: deadline
+  - trigger: homeassistant
+    event: start
+    id: startup
+  - trigger: time_pattern
+    minutes: "/1"
+    id: recovery_check
+
+conditions: []
+
+actions:
+  - choose:
+      - conditions:
+          - condition: trigger
+            id: turned_on
+        sequence:
+          - action: input_datetime.set_datetime
+            target:
+              entity_id: !input deadline_helper
+            data:
+              timestamp: >-
+                {% set current = as_timestamp(now()) %}
+                {% set timed_deadline = current +
+                   ([states(minutes_entity) | float(10), 1] | max) * 60 %}
+                {% set dawn = as_timestamp(state_attr('sun.sun', 'next_dawn'), 0) %}
+                {{ [timed_deadline, dawn] | min
+                   if dawn > current else timed_deadline }}
+    default:
+      - condition: state
+        entity_id: !input controlled_entity
+        state: "on"
+      - condition: template
+        value_template: >-
+          {% set deadline = state_attr(deadline_entity, 'timestamp') | float(0) %}
+          {{ deadline > 0 and deadline <= as_timestamp(now()) }}
+      - action: homeassistant.turn_off
+        target:
+          entity_id: !input controlled_entity
+
+mode: restart

@@ -1,0 +1,109 @@
+
+- type: heading
+  heading: "💡 Lighting Master Controller"
+
+- type: grid
+  columns: 2
+  square: false
+  cards:
+    - type: custom:mushroom-entity-card
+      entity: group.all_house_lights
+      name: All House Lights
+      icon: mdi:lightbulb-group
+      icon_color: amber
+      tap_action:
+        action: toggle
+    - type: custom:mushroom-entity-card
+      entity: zone.home
+      name: Customization Settings
+      icon: mdi:tune
+      icon_color: purple
+      content_info: none
+      secondary_info: none
+      tap_action:
+        action: navigate
+        navigation_path: /family-view/settings
+
+- type: heading
+  heading: "🏠 Area Control Grid"
+
+- type: grid
+  columns: 2
+  square: false
+  cards:
+    # --- EXTERIOR GROUP ---
+    - type: entities
+      title: Exterior
+      show_header_toggle: false
+      entities:
+        - type: custom:mushroom-light-card
+          entity: switch.basement_basement_exterior_light
+          name: Basement Outside
+        - type: custom:mushroom-light-card
+          entity: switch.light_outside_rear
+          name: Rear Outside
+        - type: custom:mushroom-light-card
+          entity: switch.garage_exterior_lights
+          name: Garage Outside
+        - type: custom:mushroom-light-card
+          entity: switch.front_door_light
+          name: Front Door
+        - type: custom:mushroom-light-card
+          entity: switch.lights_outside_front
+          name: Lamppost Landscape
+
+    # --- HALLWAY GROUP ---
+    - type: entities
+      title: Hallway
+      show_header_toggle: false
+      entities:
+        - type: custom:mushroom-light-card
+          entity: switch.hallway_stairs_rear
+          name: Back Stairs
+        - type: custom:mushroom-light-card
+          entity: switch.rear_hallway_stairs
+          name: Rear Hallway Stairs
+        - type: custom:mushroom-light-card
+          entity: switch.garage_entry_light
+          name: Garage Entry
+
+    # --- BASEMENT GROUP ---
+    - type: entities
+      title: Basement
+      show_header_toggle: false
+      entities:
+        - type: custom:mushroom-light-card
+          entity: switch.garage_interior_lights
+          name: Garage Interior
+        - type: custom:mushroom-light-card
+          entity: light.feit1_2
+          name: Basement Boiler
+        - type: custom:mushroom-light-card
+          entity: light.feit2_2
+          name: Basement Air Handler
+        - type: custom:mushroom-light-card
+          entity: light.feit3
+          name: Basement Stairs
+        - type: custom:mushroom-light-card
+          entity: light.feit4_2
+          name: Basement Laundry
+
+    # --- DEN & GARAGE GROUPS ---
+    - type: entities
+      title: Den & Garage
+      show_header_toggle: false
+      entities:
+        - type: custom:mushroom-light-card
+          entity: switch.media_room_ceiling_power
+          name: Den Ceiling Switch
+        - type: custom:mushroom-light-card
+          entity: light.wiz_rgbw_tunable_80f05e
+          name: Fireplace Accent Right
+        - type: custom:mushroom-light-card
+          entity: light.wiz_rgbw_tunable_81148e
+          name: Fireplace Accent Left
+        - type: divider
+        - type: custom:mushroom-light-card
+          entity: switch.lights_basement_staiirs
+          name: Basements Lights (Garage)
+

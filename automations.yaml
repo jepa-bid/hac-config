@@ -1,0 +1,126 @@
+- alias: "Auto Off: Basement Exterior"
+  description: "Automatically turns off Basement Exterior light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.basement_basement_exterior_light
+      minutes_helper: input_number.light_auto_off_minutes_basement_exterior
+      deadline_helper: input_datetime.light_shutoff_time_basement_exterior
+
+- alias: "Auto Off: Hallway Stairs"
+  description: "Automatically turns off Hallway Stairs light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.rear_hallway_stairs
+      minutes_helper: input_number.light_auto_off_minutes_hallway_stairs
+      deadline_helper: input_datetime.light_shutoff_time_hallway_stairs
+
+- alias: "Auto Off: Garage Interior"
+  description: "Automatically turns off Garage Interior lights based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.garage_interior_lights
+      minutes_helper: input_number.light_auto_off_minutes_garage_interior
+      deadline_helper: input_datetime.light_shutoff_time_garage_interior
+
+- alias: "Auto Off: Rear Stairs"
+  description: "Automatically turns off Rear Stairs light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.light_outside_rear
+      minutes_helper: input_number.light_auto_off_minutes_rear_stairs
+      deadline_helper: input_datetime.light_shutoff_time_rear_stairs
+
+- alias: "Auto Off: Media Room Ceiling"
+  description: "Automatically turns off Media Room Ceiling switch based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.media_room_ceiling_power
+      minutes_helper: input_number.light_auto_off_minutes_media_room_ceiling
+      deadline_helper: input_datetime.light_shutoff_time_media_room_ceiling
+
+- alias: "Auto Off: Garage Exterior"
+  description: "Automatically turns off Garage Exterior light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.garage_interior_lights
+      minutes_helper: input_number.light_auto_off_minutes_garage_exterior
+      deadline_helper: input_datetime.light_shutoff_time_garage_exterior
+
+- alias: "Auto Off: Garage Entry"
+  description: "Automatically turns off Garage Entry light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.garage_entry_light
+      minutes_helper: input_number.light_auto_off_minutes_garage_entry
+      deadline_helper: input_datetime.light_shutoff_time_garage_entry
+
+- alias: "Auto Off: Outside Front"
+  description: "Automatically turns off Outside Front lights based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.lights_outside_front
+      minutes_helper: input_number.light_auto_off_minutes_outside_front
+      deadline_helper: input_datetime.light_shutoff_time_outside_front
+
+- alias: "Auto Off: Outside Rear"
+  description: "Automatically turns off Outside Rear light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.light_outside_rear
+      minutes_helper: input_number.light_auto_off_minutes_outside_rear
+      deadline_helper: input_datetime.light_shutoff_time_outside_rear
+
+- alias: "Auto Off: Front Door"
+  description: "Automatically turns off Front Door lights based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.front_door_light
+      minutes_helper: input_number.light_auto_off_minutes_front_door
+      deadline_helper: input_datetime.light_shutoff_time_front_door
+
+- alias: "Auto Off: Hallway Stairs Rear"
+  description: "Automatically turns off Hallway Stairs Rear lights based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.hallway_stairs_rear
+      minutes_helper: input_number.light_auto_off_minutes_hallway_stairs_rear
+      deadline_helper: input_datetime.light_shutoff_time_hallway_stairs_rear
+
+- alias: "Auto Off: Basement"
+  description: "Automatically turns off Basement lights based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: switch.lights_basement_staiirs
+      minutes_helper: input_number.light_auto_off_minutes_basement
+      deadline_helper: input_datetime.light_shutoff_time_basement
+
+- alias: "Auto Off: Fireplace Accent Right"
+  description: "Automatically turns off Fireplace Accent Right light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: light.wiz_rgbw_tunable_80f05e
+      minutes_helper: input_number.light_auto_off_minutes_fireplace_accent_right
+      deadline_helper: input_datetime.light_shutoff_time_fireplace_accent_right
+
+- alias: "Auto Off: Fireplace Accent Left"
+  description: "Automatically turns off Fireplace Accent Left light based on helper minutes or dawn."
+  use_blueprint:
+    path: jepa/persistent_light_auto_off.yaml
+    input:
+      controlled_entity: light.wiz_rgbw_tunable_81148e
+      minutes_helper: input_number.light_auto_off_minutes_fireplace_accent_left
+      deadline_helper: input_datetime.light_shutoff_time_fireplace_accent_left
+

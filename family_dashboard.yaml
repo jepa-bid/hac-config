@@ -1,0 +1,203 @@
+title: "Home Control"
+views:
+  - title: Status & Controls
+    path: main
+    icon: mdi:home-assistant
+    cards:
+      - type: vertical-stack
+        cards:
+          # --- SECTION 1: SYSTEM GLANCE CHIPS ---
+          - type: custom:mushroom-chips-card
+            alignment: center
+            chips:
+              - type: template
+                icon: mdi:gas-station
+                icon_color: orange
+                content: >-
+                  {% set pct = states('sensor.exterior_propane_tank_monitor_propane_tank_level') | float(0) %}
+                  {% set gal = states('sensor.exterior_propane_tank_monitor_propane_gallons_remaining') | float(0) %}
+                  Propane: {{ pct | round(2) }}% ({{ gal | round(2) }} gal)
+                tap_action:
+                  action: more-info
+                entity: sensor.exterior_propane_tank_monitor_propane_tank_level
+              - type: template
+                icon: mdi:barrel
+                icon_color: blue
+                content: >-
+                  {% set pct = states('sensor.basement_6764_level') | float(0) %}
+                  {% set gal = states('sensor.basement_6764_volume') | float(0) %}
+                  Heating Oil: {{ pct | round(2) }}% ({{ gal | round(2) }} gal)
+                tap_action:
+                  action: more-info
+                entity: sensor.basement_6764_level
+
+          # --- SECTION 2: CLIMATE & THERMOSTATS ---
+          - type: heading
+            heading: 🌡️ Climate Controls
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: custom:mushroom-climate-card
+                entity: climate.t6_pro_z_wave_programmable_thermostat_3
+                name: 1st Floor
+                hvac_modes:
+                  - heat
+                  - cool
+                  - "off"
+                show_temperature_control: true
+              - type: custom:mushroom-climate-card
+                entity: climate.t6_pro_z_wave_programmable_thermostat_2
+                name: 2nd Floor
+                hvac_modes:
+                  - heat
+                  - cool
+                  - "off"
+                show_temperature_control: true
+              - type: custom:mushroom-climate-card
+                entity: climate.t6_pro_z_wave_programmable_thermostat
+                name: ADU
+                hvac_modes:
+                  - heat
+                  - cool
+                  - "off"
+                show_temperature_control: true
+
+          # --- SECTION 3: GARAGE DOORS ---
+          - type: heading
+            heading: 🚗 Garage Doors
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: custom:mushroom-cover-card
+                entity: cover.ratgdov2_5i_fb86fe_door
+                name: Bay 1
+                show_buttons_control: true
+              - type: custom:mushroom-cover-card
+                entity: cover.ratgdov2_5i_fb81c5_door
+                name: Bay 2
+                show_buttons_control: true
+              - type: custom:mushroom-cover-card
+                entity: cover.ratgdov2_5i_fb8e24_door
+                name: Bay 3
+                show_buttons_control: true
+
+          # --- SECTION 4: LIGHTING MASTER CONTROLLER ---
+          - type: heading
+            heading: "💡 Lighting Master Controller"
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: group.all_house_lights
+                name: All House Lights
+                icon: mdi:lightbulb-group
+                icon_color: amber
+                tap_action:
+                  action: toggle
+              - type: custom:mushroom-entity-card
+                entity: zone.home
+                name: Customization Settings
+                icon: mdi:tune
+                icon_color: purple
+                content_info: none
+                secondary_info: none
+                tap_action:
+                  action: navigate
+                  navigation_path: /family-view/settings
+
+          # --- SECTION 5: AREA CONTROL GRID ---
+          - type: heading
+            heading: "🏠 Area Control Grid"
+          - type: grid
+            columns: 2
+            square: false
+            cards:
+              # --- EXTERIOR GROUP ---
+              - type: entities
+                title: Exterior
+                show_header_toggle: false
+                entities:
+                  - type: custom:mushroom-light-card
+                    entity: switch.garage_interior_lights
+                    name: Garage Interior
+                  - type: custom:mushroom-light-card
+                    entity: switch.light_outside_rear
+                    name: Rear Outside
+                  - type: custom:mushroom-light-card
+                    entity: switch.garage_exterior_lights
+                    name: Garage Outside
+                  - type: custom:mushroom-light-card
+                    entity: switch.front_door_light
+                    name: Front Door
+                  - type: custom:mushroom-light-card
+                    entity: switch.lights_outside_front
+                    name: Lamppost Landscape
+                  - type: custom:mushroom-light-card
+                    entity: switch.basement_basement_exterior_light
+                    name: Side Outside
+
+              # --- HALLWAY GROUP ---
+              - type: entities
+                title: Hallway
+                show_header_toggle: false
+                entities:
+                  - type: custom:mushroom-light-card
+                    entity: switch.stairs_rear
+                    name: Back Stairs
+                  - type: custom:mushroom-light-card
+                    entity: switch.rear_hallway_stairs
+                    name: Rear Hallway Stairs
+                  - type: custom:mushroom-light-card
+                    entity: switch.garage_entry_light
+                    name: Garage Entry
+
+              # --- BASEMENT GROUP ---
+              - type: entities
+                title: Basement
+                show_header_toggle: false
+                entities:
+                  - type: custom:mushroom-light-card
+                    entity: switch.lights_basement_staiirs
+                    name: Basements Lights
+                  - type: custom:mushroom-light-card
+                    entity: light.feit1_2
+                    name: Basement Boiler
+                  - type: custom:mushroom-light-card
+                    entity: light.feit2_2
+                    name: Basement Air Handler
+                  - type: custom:mushroom-light-card
+                    entity: light.feit3
+                    name: Basement Stairs
+                  - type: custom:mushroom-light-card
+                    entity: light.feit4_2
+                    name: Basement Laundry
+
+              # --- DEN & GARAGE GROUPS ---
+              - type: entities
+                title: Den & Garage
+                show_header_toggle: false
+                entities:
+                  - type: custom:mushroom-light-card
+                    entity: switch.media_room_ceiling_power
+                    name: Den Ceiling Switch
+                  - type: custom:mushroom-light-card
+                    entity: light.wiz_rgbw_tunable_80f05e
+                    name: Fireplace Accent Right
+                  - type: custom:mushroom-light-card
+                    entity: light.wiz_rgbw_tunable_81148e
+                    name: Fireplace Accent Left
+                  - type: divider
+
+  - title: Automation Settings
+    path: settings
+    icon: mdi:cog-outline
+    cards:
+      - type: markdown
+        title: "⚙️ Settings & Customization"
+        content: |
+          ### Helper Adjustments
+          Use the sliders on the main page to tune live auto-off timers. To adjust automation parameters natively, please use the core Settings menu or edit automation rules globally.
+

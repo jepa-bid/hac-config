@@ -1,0 +1,30 @@
+# Secrets
+secrets.yaml
+*.pem
+*.key
+known_devices.yaml
+
+# Databases and logs
+*.db
+*.db-shm
+*.db-wal
+*.log
+*.log.*
+OZW_Log.txt
+
+# HA internals
+.storage/
+.cloud/
+.google.token
+.uuid
+.HA_VERSION
+deps/
+tts/
+backups/
+custom_components/**/__pycache__/
+__pycache__/
+
+# Misc
+.DS_Store
+*.swp
+.vscode/
